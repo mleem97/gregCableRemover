@@ -1,6 +1,6 @@
 # Source layout
 
-This repository follows the same high-level layout convention as the other `gregMod` repositories: entry points and metadata live in `Core/`, feature code is grouped by responsibility, and documentation lives under `docs/`.
+This repository follows the same high-level layout convention as the other `gregMod` repositories: entry points and metadata live in `Core/`, feature code is grouped by responsibility, GitHub metadata lives under `.github/`, and documentation lives under `docs/`.
 
 All source files currently keep the root namespace **`MassCableRemover`** or existing sub-namespaces. The folders are primarily for navigation and separation of responsibilities.
 
@@ -8,11 +8,13 @@ All source files currently keep the root namespace **`MassCableRemover`** or exi
 
 | Folder | Role |
 |--------|------|
+| **`.github/`** | Funding metadata, issue templates, pull request template, and build workflow. |
 | **`Core/`** | MelonLoader entry point and assembly/Melon metadata. |
 | **`Config/`** | Runtime keybind configuration loaded from `MassCableRemover_Keybinds.txt` in the game `Mods` folder. |
 | **`Networking/`** | Cable target detection, vanilla hold duration lookup, and cable disconnect operations. |
 | **`Patches/`** | Standalone Harmony patches for legacy Unity input compatibility. |
 | **`UI/`** | IMGUI charge ring and user-facing visual feedback helpers. |
+| **`references/`** | Local build reference DLL inputs. |
 | **`docs/`** | Repository documentation. |
 
 ## File map
@@ -44,8 +46,25 @@ All source files currently keep the root namespace **`MassCableRemover`** or exi
 |------|------|
 | `MassRemoveChargeRing.cs` | Draws the IMGUI charge ring used by device and world cable removal. |
 
+### .github/
+
+| File | Role |
+|------|------|
+| `FUNDING.yml` | GitHub Sponsors and gregFramework funding links. |
+| `pull_request_template.md` | Standard gregMod PR checklist. |
+| `ISSUE_TEMPLATE/bug_report.md` | Bug-report issue template. |
+| `ISSUE_TEMPLATE/feature_request.md` | Feature-request issue template. |
+| `workflows/build.yml` | .NET build workflow that is reference-aware. |
+
+### references/
+
+| File | Role |
+|------|------|
+| `README.md` | Documents required local reference DLLs for building. |
+| `.gitkeep` | Keeps the folder in the repository without committing DLLs. |
+
 ## Build notes
 
-The project file **`MassCableRemover.csproj`** stays at the repository root. SDK-style project inclusion picks up all `*.cs` files under the project directory, excluding ignored build outputs such as `bin/` and `obj/`.
+The project file **`MassCableRemover.csproj`** stays at the repository root. SDK-style inclusion picks up all `*.cs` files under the project directory, excluding ignored build outputs such as `bin/` and `obj/`.
 
-Copy `Directory.Build.props.example` to `Directory.Build.props` locally and set the Data Center install paths before building.
+The project resolves build inputs from **`references/`**, matching the convention used by the other gregMod repositories. Copy the required MelonLoader, IL2CPP, Unity, and game assemblies into that folder before building locally.
