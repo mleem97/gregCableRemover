@@ -1,12 +1,26 @@
-bin/Debug/
-bin/Release/*
-!bin/Release/MassCableRemover.dll
-obj/
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# IDE
 .vs/
 *.user
 *.suo
-*.userosscache
-*.sln.docstates
+*.csproj.user
+.idea/
+.cursor/
 
-# Local MSBuild paths (copy from Directory.Build.props.example)
-Directory.Build.props
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+
+# Dist
+dist/
+
+# Local reference binaries copied from a Data Center / MelonLoader install
+references/*.dll
+!references/.gitkeep
+!references/README.md
