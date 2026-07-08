@@ -1,0 +1,79 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Verify local reference placeholders
+        shell: pwsh
+        run: |
+          $required = @(
+            'MelonLoader.dll',
+            '0Harmony.dll',
+            'Il2CppInterop.Runtime.dll',
+            'Assembly-CSharp.dll',
+            'Il2Cppmscorlib.dll',
+            'Il2CppSystem.dll',
+            'Il2CppSystem.Core.dll',
+            'Il2Cpp__Generated.dll',
+            'UnityEngine.CoreModule.dll',
+            'UnityEngine.PhysicsModule.dll',
+            'UnityEngine.IMGUIModule.dll',
+            'Unity.InputSystem.dll',
+            'UnityEngine.InputLegacyModule.dll',
+            'UnityEngine.TextRenderingModule.dll',
+            'UnityEngine.UI.dll'
+          )
+
+          $missing = $required | Where-Object { -not (Test-Path "references/$_") }
+          if ($missing.Count -gt 0) {
+            Write-Host 'Reference DLLs are not committed to this repository.'
+            Write-Host 'Copy them into references/ before enabling a strict CI build:'
+            $missing | ForEach-Object { Write-Host " - $_" }
+            exit 0
+          }
+
+      - name: Build Release
+        shell: pwsh
+        run: |
+          $required = @(
+            'MelonLoader.dll',
+            '0Harmony.dll',
+            'Il2CppInterop.Runtime.dll',
+            'Assembly-CSharp.dll',
+            'Il2Cppmscorlib.dll',
+            'Il2CppSystem.dll',
+            'Il2CppSystem.Core.dll',
+            'Il2Cpp__Generated.dll',
+            'UnityEngine.CoreModule.dll',
+            'UnityEngine.PhysicsModule.dll',
+            'UnityEngine.IMGUIModule.dll',
+            'Unity.InputSystem.dll',
+            'UnityEngine.InputLegacyModule.dll',
+            'UnityEngine.TextRenderingModule.dll',
+            'UnityEngine.UI.dll'
+          )
+
+          $missing = $required | Where-Object { -not (Test-Path "references/$_") }
+          if ($missing.Count -gt 0) {
+            Write-Host 'Skipping dotnet build because local reference DLLs are absent.'
+            exit 0
+          }
+
+          dotnet build MassCableRemover.sln -c Release --no-restore
