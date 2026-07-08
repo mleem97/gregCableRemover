@@ -1,3 +1,57 @@
-Mass Cable Remover is a MelonLoader (IL2CPP) mod for Data Center. Hold a configurable aim key (default **LeftCtrl**) and look at a network switch or patch panel, then hold a configurable charge input (default **RightMouse**) to fill the charge ring using the game’s interact hold time; when it completes, all cables on that device are disconnected. If you are **not** looking at a switch or patch panel, holding the same two inputs for **10 seconds** removes **all cables in the entire world** (release keys or look at a device to cancel). Version 0.1.1, created by Mochimus.
+# Mass Cable Remover
 
-**Keybinds:** On first run the mod creates **`MassCableRemover_Keybinds.txt`** in the game’s **Mods** folder (next to your other mods). Edit that file while the game is closed, then restart. `AimHoldKey` is any Unity Input System [Key](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/api/UnityEngine.InputSystem.Key.html) name (e.g. `LeftCtrl`, `LeftShift`, `RightAlt`). `ChargeHold` is `RightMouse`, `LeftMouse`, `MiddleMouse`, or a `Key` name (e.g. `Space`, `E`).
+Mass Cable Remover is a MelonLoader IL2CPP mod for **Data Center**.
+
+Hold the configurable aim key, default `LeftCtrl`, and look at a network switch or patch panel. Then hold the configurable charge input, default `RightMouse`, until the charge ring completes. The mod disconnects all cables on that device.
+
+When you are **not** looking at a switch or patch panel, holding the same two inputs for **10 seconds** removes all cables in the loaded world. Release the keys or look at a device to cancel the world purge.
+
+## Current version
+
+`0.1.1`, originally created by Mochimus.
+
+## Keybinds
+
+On first run the mod creates this file in the game `Mods` folder:
+
+```text
+MassCableRemover_Keybinds.txt
+```
+
+Edit the file while the game is closed, then restart.
+
+Supported values:
+
+| Setting | Default | Accepted values |
+|---------|---------|-----------------|
+| `AimHoldKey` | `LeftCtrl` | Any Unity Input System `Key` name, for example `LeftCtrl`, `LeftShift`, `RightAlt`. |
+| `ChargeHold` | `RightMouse` | `RightMouse`, `LeftMouse`, `MiddleMouse`, or any Unity Input System `Key` name such as `Space` or `E`. |
+
+## Source layout
+
+The repository is organized in the same style as the other gregMod repositories.
+
+| Folder | Role |
+|--------|------|
+| `Core/` | MelonLoader entry point and Melon metadata. |
+| `Config/` | Keybind config loading and input binding helpers. |
+| `Networking/` | Target detection and cable disconnect logic. |
+| `Patches/` | Harmony compatibility patches. |
+| `UI/` | IMGUI charge ring and prompt helpers. |
+| `docs/` | Source layout and project documentation. |
+
+See [`docs/SOURCE_LAYOUT.md`](docs/SOURCE_LAYOUT.md) for the detailed file map.
+
+## Local build
+
+Copy `Directory.Build.props.example` to `Directory.Build.props` and set the paths for your Data Center installation.
+
+```bash
+dotnet build MassCableRemover.sln -c Release
+```
+
+To also copy the built DLL into the game `Mods` folder when `DataCenterGameDir` is configured:
+
+```bash
+dotnet build MassCableRemover.sln -c Release /p:CopyToGameMods=true
+```
