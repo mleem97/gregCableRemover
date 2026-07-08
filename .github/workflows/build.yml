@@ -76,4 +76,4 @@ jobs:
             exit 0
           }
 
-          dotnet build MassCableRemover.sln -c Release --no-restore
+          dotnet build MassCableRemover.sln -c Release
