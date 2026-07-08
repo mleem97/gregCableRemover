@@ -15,80 +15,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MelonLoader">
-      <HintPath>$(MelonLoaderNet6Dir)\MelonLoader.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="0Harmony">
-      <HintPath>$(MelonLoaderNet6Dir)\0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>$(MelonLoaderNet6Dir)\Il2CppInterop.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Assembly-CSharp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Il2Cppmscorlib.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2CppSystem">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Il2CppSystem.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2CppSystem.Core">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Il2CppSystem.Core.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2Cpp__Generated">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Il2Cpp__Generated.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.CoreModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>$(Il2CppInteropAssembliesDir)\Unity.InputSystem.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.InputLegacyModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>$(Il2CppInteropAssembliesDir)\UnityEngine.UI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+    <Reference Include="MelonLoader"><HintPath>references/MelonLoader.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>references/0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppInterop.Runtime"><HintPath>references/Il2CppInterop.Runtime.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Assembly-CSharp"><HintPath>references/Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2Cppmscorlib"><HintPath>references/Il2Cppmscorlib.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppSystem"><HintPath>references/Il2CppSystem.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2CppSystem.Core"><HintPath>references/Il2CppSystem.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Il2Cpp__Generated"><HintPath>references/Il2Cpp__Generated.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>references/UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.PhysicsModule"><HintPath>references/UnityEngine.PhysicsModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>references/UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Unity.InputSystem"><HintPath>references/Unity.InputSystem.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.InputLegacyModule"><HintPath>references/UnityEngine.InputLegacyModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.TextRenderingModule"><HintPath>references/UnityEngine.TextRenderingModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.UI"><HintPath>references/UnityEngine.UI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="gregCore"><HintPath>references/gregCore.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 
-  <ItemGroup Condition="Exists('$(GregCoreDir)gregCore.dll')">
-    <Reference Include="gregCore">
-      <HintPath>$(GregCoreDir)gregCore.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-
-  <PropertyGroup Condition="Exists('$(GregCoreDir)gregCore.dll')">
+  <PropertyGroup Condition="Exists('references/gregCore.dll')">
     <DefineConstants>$(DefineConstants);WITH_GREGCORE</DefineConstants>
   </PropertyGroup>
-
-  <Target Name="CopyToGameMods" AfterTargets="Build" Condition="'$(CopyToGameMods)' == 'true'">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DataCenterGameDir)\Mods\" SkipUnchangedFiles="true" />
-  </Target>
 </Project>
